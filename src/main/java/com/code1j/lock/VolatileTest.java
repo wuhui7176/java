@@ -2,6 +2,8 @@ package com.code1j.lock;
 
 import org.junit.Test;
 
+import java.util.concurrent.locks.Lock;
+
 /**
  * @ wuhui
  * @ date  2017/8/29下午5:58
