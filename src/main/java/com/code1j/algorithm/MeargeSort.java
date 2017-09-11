@@ -16,6 +16,7 @@ public class MeargeSort {
             System.out.println(i);
         }
 
+        System.out.println(c);
     }
 
 
@@ -44,12 +45,12 @@ public class MeargeSort {
 
 
 
-
+    public static int  c= 0;
 
 
     private static void meargeSortArray(int arr[],int temp[],int left,int middle,int right){
 
-
+        c++;
 
         int i = left;
 

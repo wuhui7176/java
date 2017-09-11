@@ -6,16 +6,17 @@ package com.code1j.algorithm;
  */
 public class Test2 {
 
-    public static void test(int a){
+    public static int test(int a){
         if(a>0){
             a = a -1;
             test(a);
         }
-        System.out.println(a);
+//        System.out.println(a);
+        return a;
     }
 
     public static void main(String[] args) {
-        test(5);
+        System.out.println(test(3));
     }
 
 
