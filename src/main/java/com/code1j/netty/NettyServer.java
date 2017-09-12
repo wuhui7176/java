@@ -24,15 +24,20 @@ public class NettyServer {
                     .handler(new LoggingHandler(LogLevel.INFO))
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
-                        public void initChannel(SocketChannel ch) {
-                            ch.write("1212121");
-                            ch.flush();
-                            System.out.println(ch);
+                        public void initChannel(SocketChannel ch){
+                            ch.pipeline().addLast(new ChannelHandlerAdapterTest());
+                            ch.pipeline().addLast(new Test2());
                         }
                     });
-
             // Bind and start to accept incoming connections.
             ChannelFuture f = b.bind(8080).sync();
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                }
+            }).start();
         }catch (Exception e){
 
         }
