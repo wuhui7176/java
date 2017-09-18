@@ -8,7 +8,10 @@ import java.util.concurrent.Executor;
  */
 public class TryCatchTest {
 
-
+    /**
+     *先返回4 入站  再返回2 压站  ，弹出2 结束
+     * @param args
+     */
     public static void main(String[] args) {
         System.out.println(test());
     }

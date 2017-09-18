@@ -89,7 +89,7 @@ public class ChannelHandlerAdapterTest extends ChannelInboundHandlerAdapter {
 
         ctx.write(msg); // (1)
         ctx.flush(); // (2)
-        ctx.channel().close().sync();
+//        ctx.channel().close().sync();
         // 第三部
 //        System.out.println( "-> " + 1);
 //        ByteBuf in = (ByteBuf) msg;

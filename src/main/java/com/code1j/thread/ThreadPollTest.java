@@ -1,5 +1,7 @@
 package com.code1j.thread;
 
+import org.junit.Test;
+
 import java.util.concurrent.*;
 
 /**
@@ -22,4 +24,13 @@ public class ThreadPollTest {
 
     }
 
+
+    @Test
+    public void test(){
+
+        System.out.println(123456);
+
+
+
+    }
 }
