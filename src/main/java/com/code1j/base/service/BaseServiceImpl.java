@@ -15,7 +15,6 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
 
     private Class clazz;
 
-    public Logger logger = LoggerFactory.getLogger(clazz);
 
     public BaseServiceImpl(){
         //获取运行时,泛型的实际类型
@@ -27,4 +26,8 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
     }
 
 
+    @Override
+    public Logger getLogger() {
+        return LoggerFactory.getLogger(clazz);
+    }
 }

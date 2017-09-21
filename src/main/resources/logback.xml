@@ -2,7 +2,7 @@
 <configuration>
 
     <!-- ch.qos.logback.core.ConsoleAppender 控制台输出 -->
-    <appender name="console" class="com.code1j.logger.TestLogger">
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>[%-5level] %d{HH:mm:ss.SSS} [%thread] %logger{36} - %msg%n</pattern>
         </encoder>
@@ -10,7 +10,7 @@
 
     <!-- 日志级别 -->
     <root>
-        <level value="error" />
+        <level value="debug" />
         <appender-ref ref="console" />
     </root>
 

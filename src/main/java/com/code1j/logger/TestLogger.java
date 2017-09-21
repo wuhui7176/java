@@ -28,7 +28,7 @@ public class TestLogger<E> extends ConsoleAppender<E> {
 
 //        event.setMessage("abc");
 
-        event.setMessage("dad");
+//        event.setMessage("dad");
 
         super.append(eventObject);
     }

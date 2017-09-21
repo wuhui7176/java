@@ -2,6 +2,7 @@ package com.code1j.base;
 
 import com.code1j.base.service.BaseServiceImpl;
 import com.code1j.base.service.IBaseService;
+import org.slf4j.Logger;
 
 /**
  * @ wuhui
@@ -12,7 +13,9 @@ public class TestServiceImpl extends BaseServiceImpl<Test>  implements ITestServ
 
     public static void main(String[] args) {
         ITestService testService = new TestServiceImpl();
-        testService.logger.debug("ssssss");
+        Logger logger = testService.getLogger();
+
+        logger.error("sssss");
 
     }
 

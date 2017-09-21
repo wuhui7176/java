@@ -9,6 +9,5 @@ import org.slf4j.LoggerFactory;
  */
 public interface IBaseService<T> {
 
-    public Logger logger = LoggerFactory.getLogger("");
-
+    public Logger getLogger();
 }
