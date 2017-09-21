@@ -23,7 +23,7 @@ import zipkin.server.EnableZipkinServer;
 
 @Controller
 @EnableAutoConfiguration
-@EnableZipkinServer
+//@EnableZipkinServer
 public class Main {
 
     @Autowired
@@ -44,6 +44,30 @@ public class Main {
     }
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Main.class, args);
+
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("调用钩子成功");
+            }
+        }));
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true){
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        thread.start();
+
+        System.out.println(123);
     }
 
     @Bean

@@ -1,6 +1,7 @@
 package com.code1j.kill;
 
 
+import java.io.IOException;
 
 /**
  * @ wuhui
@@ -10,7 +11,8 @@ public class ThreadKill {
 
     public volatile static boolean run = true;
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
+
 
 
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
@@ -18,13 +20,33 @@ public class ThreadKill {
             public void run() {
 
                 System.out.println("调用钩子函数");
-                run = false;
+                run = true;
+                int i = 0;
+                while (run) {
+                    try {
+                        if(i<10){
+                            Thread.sleep(80);
+                            i++;
+                        }else break;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }));
-
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                while (true){
+//                    System.out.println(1);
+//                }
+//            }
+//        }).start();
         while (run){
             Thread.sleep(10);
         }
+
+
 
     }
 
