@@ -1051,25 +1051,29 @@ public class MyThreadPoolExecutor extends AbstractExecutorService {
         this.threadFactory = threadFactory;
         this.handler = handler;
     }
-
+    //1 : 当前ctl  运行的线程数  小于 corePoolSize  直接新建一个worker  执行这个任务
+    // 2 :   当前的的任务加入等待队列成功
+    //  3 : 当前任务加入等待队列失败，再新建一个线程执行任务
 
     public void execute(Runnable command) {
         if (command == null)
             throw new NullPointerException();
         int c = ctl.get();
         int p = workerCountOf(c);
-        //如果当前工作线程小于核心线程，之间启动一个线程运行
+        //如果当前工作线程小于核心线程，直接启动一个线程运行
         if (p < corePoolSize) {
             if (addWorker(command, true))
                 return;
             c = ctl.get();
         }
-
+        //扔到等待队列中，等待执行
         if (isRunning(c) && workQueue.offer(command)) {
             int recheck = ctl.get();
+            int pp = workerCountOf(recheck);
             if (! isRunning(recheck) && remove(command))
                 reject(command);
-            else if (workerCountOf(recheck) == 0)
+            //添加一个空线程，增加一个线程数量
+            else if (pp == 0)
                 addWorker(null, false);
         }
         else if (!addWorker(command, false))

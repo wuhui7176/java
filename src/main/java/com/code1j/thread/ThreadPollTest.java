@@ -71,19 +71,31 @@ public class ThreadPollTest {
 
     }
 
+
+
+    @Test
+    public void test444(){
+        ArrayBlockingQueue arrayBlockingQueue = new ArrayBlockingQueue(10);
+
+        arrayBlockingQueue.offer(123);
+
+        System.out.println();
+    }
+
+
     @Test
     public void test3() throws InterruptedException {
         //corePoolSize  核心线程池大小  运行线程大于这个后会放到等待队列里
 
-        //maximumPoolSize  最大线程，大于这个数会拒绝任务
+        //maximumPoolSize  最大线程，等待队列满后，会继续新建线程 达到 max 个线程后，开始拒绝新的任务
 
         //keepAliveTime
 
         //workQueue
 
 
-        MyThreadPoolExecutor executorService = new MyThreadPoolExecutor(1,2,100L, TimeUnit.DAYS,
-                new ArrayBlockingQueue<Runnable>(3));
+        MyThreadPoolExecutor executorService = new MyThreadPoolExecutor(1,300,100L, TimeUnit.DAYS,
+                new ArrayBlockingQueue<Runnable>(1));
 
 
         for (int i = 0; i < 5 ; i++) {
