@@ -5,3 +5,12 @@
 
 
 awk '{RN>1}'
+
+
+
+ps -ef |grep java
+
+ps -ef |grep java |awk '{print NR}'
+
+
+ps -ef |grep java |awk '{for(i=0;i<NR;++i) ++sum}END {print sum}'
