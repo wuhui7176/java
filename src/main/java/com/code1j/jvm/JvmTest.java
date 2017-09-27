@@ -87,6 +87,7 @@ public class JvmTest {
 
     }
 
+    //-XX:+UseG1GC 使用g1垃圾收集器
 
     //java com.code1j.jvm.JvmTest  运行。class文件  14752
     //java com.code1j.jvm.JvmTest das das 2ed ddd dsada   传参数给args
