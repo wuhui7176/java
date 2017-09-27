@@ -33,12 +33,12 @@ public class DruidTest {
         Thread.sleep(1000);
         DruidPooledConnection druidPooledConnection = druidDataSource.getConnection();
 
-        ResultSet resultSet = druidPooledConnection.getConnection().createStatement().executeQuery("SELECT * FROM orders limit 0,10");
-
-        while (resultSet.next()){
-
-            System.out.println(resultSet.getString(1));
-        }
+//        ResultSet resultSet = druidPooledConnection.getConnection().createStatement().executeQuery("SELECT * FROM orders limit 0,10");
+//
+//        while (resultSet.next()){
+//
+//            System.out.println(resultSet.getString(1));
+//        }
 
         while (true){
             Thread.sleep(1000000);

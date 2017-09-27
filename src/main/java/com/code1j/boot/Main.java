@@ -39,7 +39,12 @@ public class Main {
     @RequestMapping("/test")
     @ResponseBody
     Object test() throws InterruptedException {
-        Thread.sleep(100);
+        while (true){
+            Thread.sleep(100000);
+            if(1==2){
+                break;
+            }
+        }
         return "success";
     }
     public static void main(String[] args) throws Exception {
