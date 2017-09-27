@@ -51,7 +51,6 @@ public class NioTest {
                 System.out.print((char)buf.get());
                 if((char)buf.get()=='a'){
                     sc.close();
-
                 }
             }
 
@@ -97,12 +96,17 @@ public class NioTest {
                 while(iter.hasNext()){
                     SelectionKey key = iter.next();
                     if(key.isAcceptable()){
+                        System.out.println("dsa");
                         handleAccept(key);
                     }
                     if(key.isReadable()){
+                        System.out.println("bbbb");
+
                         handleRead(key);
                     }
                     if(key.isWritable() && key.isValid()){
+                        System.out.println("cccc");
+
                         handleWrite(key);
                     }
                     if(key.isConnectable()){
