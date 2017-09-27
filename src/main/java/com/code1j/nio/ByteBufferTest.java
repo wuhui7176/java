@@ -1,6 +1,7 @@
 package com.code1j.nio;
 
 import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
 
 /**
  *
@@ -22,18 +23,23 @@ public class ByteBufferTest {
         ByteBuffer byteBuffer = ByteBuffer.allocate(100);
 
 
-        byteBuffer.putLong(10);
+        byteBuffer.putChar('a');
 
-
-        System.out.println(byteBuffer.capacity());
-
-        System.out.println(byteBuffer.position());
-
-        System.out.println(byteBuffer.limit());
+//
+//        System.out.println(byteBuffer.capacity());
+//
+//        System.out.println(byteBuffer.position());
+//
+//        System.out.println(byteBuffer.limit());
 
 
         System.out.println("=======");
 
+
+        byte[] b = byteBuffer.array();
+
+
+        System.out.println();
 
 
 
@@ -58,13 +64,13 @@ public class ByteBufferTest {
 
 //        byteBuffer.compact();
 //        byteBuffer.mark();
-        byteBuffer.reset();
-
-        System.out.println(byteBuffer.capacity());
-
-        System.out.println(byteBuffer.position());
-
-        System.out.println(byteBuffer.limit());
+//        byteBuffer.reset();
+//
+//        System.out.println(byteBuffer.capacity());
+//
+//        System.out.println(byteBuffer.position());
+//
+//        System.out.println(byteBuffer.limit());
 //
 //        System.out.println(byteBuffer.mark());
 
