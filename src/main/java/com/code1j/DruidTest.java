@@ -58,7 +58,7 @@ public class DruidTest {
         druidDataSource.setInitialSize(10000);
         druidDataSource.setMaxActive(20000);
 
-//        druidDataSource.setPassword("JDglDh05opUq");
+        druidDataSource.setPassword("JDglDh05opUq");
         druidDataSource.setDriverClassName("com.mysql.jdbc.Driver");
 
         druidDataSource.init();
