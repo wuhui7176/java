@@ -93,7 +93,7 @@ public class JvmTest {
     //java com.code1j.jvm.JvmTest das das 2ed ddd dsada   传参数给args
     //java -Xms1024m -Xmx1024m com.code1j.jvm.JvmTest    jvm启动参数设置
 
-
+    //-Xss 虚拟机栈的最大值
     //-Xms 初始堆大小
     //-Xmx 最大堆大小
     //-Xmn 年轻代大小(1.4or lator)
