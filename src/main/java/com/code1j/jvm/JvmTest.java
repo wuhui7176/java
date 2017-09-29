@@ -15,6 +15,8 @@ public class JvmTest {
 
 
     //[Full GC (Ergonomics) [PSYoungGen: 262144K->260462K(305664K)]
+
+
     // [ParOldGen: 639176K->639176K(699392K)] 901320K->899638K(1005056K),
     // [Metaspace: 2657K->2657K(1056768K)], 2.9479086 secs] [Times: user=10.53 sys=0.03, real=2.95 secs]
 
@@ -35,9 +37,7 @@ public class JvmTest {
 
 
 
-
-
-    public static void main(String[] args) {
+    public static void memSout(){
 
         Thread t= new Thread(new Runnable() {
             @Override
@@ -59,7 +59,13 @@ public class JvmTest {
         t.setDaemon(false);
         t.start();
 
+    }
 
+
+
+    public static void main(String[] args) {
+
+        memSout();
         long start = System.currentTimeMillis();
 
 
@@ -100,5 +106,7 @@ public class JvmTest {
     //-XX:NewRatio 年轻代(包括Eden和两个Survivor区)与年老代的比值(除去持久代)
     //-XX:SurvivorRatio	 Eden区与Survivor区的大小比值
 
-    //-XX:+PrintGCDetails
+    //-XX:+PrintGCDetails 打印gc日志
+    //-XX:+PrintGCDateStamps
+    //-XX:+PrintGCTimeStamps
 }
