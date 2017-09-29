@@ -39,23 +39,34 @@ public class TreeMap<K,V>
 {
 
 
+
+
+
+
     public static void main(String[] args) {
         TreeMap treeMap = new TreeMap();
         treeMap.put(10,"dsadas");
         treeMap.put(6,"dsadas");
         treeMap.put(15,"dsadsa");
-        treeMap.put(8,"dsadas");
+        treeMap.put(2,"dsadas");
 
-        Entry root = treeMap.root;
+        Entry p = treeMap.root;
+
+        System.out.println(p);
+
+        while (p.left!=null){
+            System.out.println(p.left);
+            p = p.left;
+        }
+
+        p = treeMap.root;
+        System.out.println("=======");
+        while (p.right!=null){
+            System.out.println(p.right);
+            p=p.right;
+        }
 
 
-        Entry p = null;
-
-        do{
-            p =root.left;
-            System.out.println(p);
-
-        }while (p!=null);
 
 //        System.out.println(treeMap.get("1221"));
 
@@ -1829,8 +1840,13 @@ public class TreeMap<K,V>
             return keyHash ^ valueHash;
         }
 
+        @Override
         public String toString() {
-            return key + "=" + value;
+            return "Entry{" +
+                    "key=" + key +
+                    ", value=" + value +
+                    ", color=" + color +
+                    '}';
         }
     }
 
