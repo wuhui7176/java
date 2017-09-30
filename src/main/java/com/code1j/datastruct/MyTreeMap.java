@@ -86,14 +86,34 @@ public class MyTreeMap<K,V>{
                     setColor(parentOf(parentOf(x)), RED);
                     // 不需要旋转
                 }else {
-
+                    if (x == rigthOf(parentOf(x))) {
+                        x = parentOf(x);
+                        rotateLeft(x);
+                    }
+                    setColor(parentOf(x), BLACK);
+                    setColor(parentOf(parentOf(x)), RED);
+                    rotateRight(parentOf(parentOf(x)));
                 }
-
-
-
             }else {
                 //祖父节点的右边
-
+                Entry<K,V> y = leftOf(parentOf(parentOf(x)));
+                //祖父是红色
+                if (colorOf(y) == RED) {
+                    setColor(parentOf(x), BLACK);
+                    setColor(y, BLACK);
+                    setColor(parentOf(parentOf(x)), RED);
+                    x = parentOf(parentOf(x));
+                } else {
+                    //先右转
+                    if (x == leftOf(parentOf(x))) {
+                        x = parentOf(x);
+                        rotateRight(x);
+                    }
+                    setColor(parentOf(x), BLACK);
+                    setColor(parentOf(parentOf(x)), RED);
+                    //再左转
+                    rotateLeft(parentOf(parentOf(x)));
+                }
             }
 
         }
@@ -104,6 +124,47 @@ public class MyTreeMap<K,V>{
 
     }
 
+    /**
+     * 左旋转
+     * @param p
+     */
+    private void rotateLeft(Entry<K,V> p) {
+       if(p!=null){
+           Entry<K,V> r = p.right;
+           p.right = r.left;
+           if(r.left !=null){
+               r.left.parent = p;
+           }
+           r.parent = p.parent;
+           if(p.parent ==null){
+               root = r;
+           }else if(p.parent.left ==p){
+               p.parent.left = r;
+           }else {
+               p.parent.right = r;
+           }
+           r.left = p;
+           p.parent = r;
+
+       }
+    }
+
+    private void rotateRight(Entry<K,V> p) {
+        if (p != null) {
+            Entry<K,V> l = p.left;
+            p.left = l.right;
+            if (l.right != null)
+                l.right.parent = p;
+            l.parent = p.parent;
+            if (p.parent == null)
+                root = l;
+            else if (p.parent.right == p)
+                p.parent.right = l;
+            else p.parent.left = l;
+            l.right = p;
+            p.parent = l;
+        }
+    }
 
     private static <K,V> void setColor(Entry<K,V> p, boolean c) {
         if (p != null)

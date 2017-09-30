@@ -40,31 +40,46 @@ public class TreeMap<K,V>
 
 
 
+    private static void sout(Entry p){
+        if(p!=null){
+            System.out.println("x= "+p +"parent = "+p.parent +"left = "+p.left+ "rigth = "+p.right);
+            sout(p.left);
+            sout(p.right);
+        }
+
+    }
+
+
 
 
 
     public static void main(String[] args) {
         TreeMap treeMap = new TreeMap();
+        treeMap.put(20,"dsadas");
+
         treeMap.put(10,"dsadas");
-        treeMap.put(6,"dsadas");
-        treeMap.put(15,"dsadsa");
-        treeMap.put(2,"dsadas");
+        treeMap.put(5,"dsadsa");
+//        treeMap.put(3,"dsadas");
+//        treeMap.put(1,"dsadas");
+
 
         Entry p = treeMap.root;
 
-        System.out.println(p);
-
-        while (p.left!=null){
-            System.out.println(p.left);
-            p = p.left;
-        }
-
-        p = treeMap.root;
-        System.out.println("=======");
-        while (p.right!=null){
-            System.out.println(p.right);
-            p=p.right;
-        }
+        sout(p);
+//
+//        System.out.println(p);
+//
+//        while (p.left!=null){
+//            System.out.println(p.left);
+//            p = p.left;
+//        }
+//
+//        p = treeMap.root;
+//        System.out.println("=======");
+//        while (p.right!=null){
+//            System.out.println(p.right);
+//            p=p.right;
+//        }
 
 
 
@@ -1953,6 +1968,7 @@ public class TreeMap<K,V>
     private void rotateLeft(Entry<K,V> p) {
         if (p != null) {
             Entry<K,V> r = p.right;
+
             p.right = r.left;
             if (r.left != null)
                 r.left.parent = p;
@@ -1973,7 +1989,8 @@ public class TreeMap<K,V>
         if (p != null) {
             Entry<K,V> l = p.left;
             p.left = l.right;
-            if (l.right != null) l.right.parent = p;
+            if (l.right != null)
+                l.right.parent = p;
             l.parent = p.parent;
             if (p.parent == null)
                 root = l;
@@ -1989,9 +2006,12 @@ public class TreeMap<K,V>
     private void fixAfterInsertion(Entry<K,V> x) {
         x.color = RED;
 
+        boolean c= x.parent.color;
+        Entry p = x.parent;
         while (x != null && x != root && x.parent.color == RED) {
             if (parentOf(x) == leftOf(parentOf(parentOf(x)))) {
                 Entry<K,V> y = rightOf(parentOf(parentOf(x)));
+                boolean d = colorOf(y);
                 if (colorOf(y) == RED) {
                     setColor(parentOf(x), BLACK);
                     setColor(y, BLACK);
