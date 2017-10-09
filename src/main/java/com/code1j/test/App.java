@@ -1,5 +1,7 @@
 package com.code1j.test;
 
+import java.util.HashMap;
+
 /**
  * @ wuhui
  * @ date  2017/9/8上午10:04
@@ -9,17 +11,12 @@ public class App {
     public static void main(String[] args) {
 
 
+        HashMap hashMap = new HashMap();
 
-        StaticCLassTest.Test test = new StaticCLassTest.Test();
+        hashMap.put("1","1");
 
-        test.setName("12313");
+        hashMap.put("1","1");
 
-        StaticCLassTest.Test test1 = new StaticCLassTest.Test();
-
-        test1.setName("2222");
-
-
-        System.out.println(test1.getName());
 
     }
 }
