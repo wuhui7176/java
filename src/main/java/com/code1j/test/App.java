@@ -17,6 +17,8 @@ public class App {
 
         hashMap.put("1","1");
 
+        int i = 16 & 12;
 
+        System.out.println(i);
     }
 }

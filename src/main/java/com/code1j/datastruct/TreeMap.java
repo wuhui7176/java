@@ -58,7 +58,7 @@ public class TreeMap<K,V>
         treeMap.put(20,"dsadas");
 
         treeMap.put(10,"dsadas");
-        treeMap.put(5,"dsadsa");
+        treeMap.put(1,"dsadsa");
 //        treeMap.put(3,"dsadas");
 //        treeMap.put(1,"dsadas");
 
@@ -1988,15 +1988,18 @@ public class TreeMap<K,V>
     private void rotateRight(Entry<K,V> p) {
         if (p != null) {
             Entry<K,V> l = p.left;
+            //1
             p.left = l.right;
             if (l.right != null)
                 l.right.parent = p;
+            //2
             l.parent = p.parent;
             if (p.parent == null)
                 root = l;
             else if (p.parent.right == p)
                 p.parent.right = l;
             else p.parent.left = l;
+            //3
             l.right = p;
             p.parent = l;
         }
