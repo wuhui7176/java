@@ -1,0 +1,20 @@
+#基础镜像
+FROM docker.io/centos
+#安装java环境
+RUN yum -y install jre
+#安装git环境
+RUN yum -y install git
+#拷贝当前主机的tomcat 到镜像中
+COPY tomcat /opt/tomcat/
+#导出端口
+EXPOSE 8080
+#工作目录
+WORKDIR /opt/tomcat/bin/
+#运行tomcat1
+CMD ["/bin/bash","catalina.sh","run"]
+
+
+#CMD ["catalina.sh","run"] 这样会保错误，因为没有exec环境
+#starting container process caused "exec: \"catalina.sh\": executable file not found in $PATH"
+#/usr/bin/docker-current: Error response from daemon:
+#invalid header field value "oci runtime error: container_linux.go:247: starting container process caused \"exec: \\\"catalina.sh\\\": executable file not found in $PATH\"\n".
