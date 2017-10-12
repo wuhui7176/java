@@ -27,7 +27,6 @@ public class ChannelHandlerAdapterTest extends ChannelInboundHandlerAdapter {
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
         System.out.println( "-> " + 8);
         //通道建立时   最先执行这里的方法
-        ctx.channel().writeAndFlush("121212121");
         super.channelRegistered(ctx);
 
 
@@ -59,8 +58,6 @@ public class ChannelHandlerAdapterTest extends ChannelInboundHandlerAdapter {
         System.out.println( "-> " + 4);
 
         super.channelReadComplete(ctx);
-
-        ctx.channel().writeAndFlush("121212121");
     }
 
     @Override
@@ -86,10 +83,13 @@ public class ChannelHandlerAdapterTest extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        super.channelRead(ctx,msg);
+        System.out.println("->"+9999);
 
-        ctx.write(msg); // (1)
-        ctx.flush(); // (2)
-//        ctx.channel().close().sync();
+        System.out.println(msg);
+//        ctx.write(msg); // (1)
+//        ctx.flush(); // (2)
+////        ctx.channel().close().sync();
         // 第三部
 //        System.out.println( "-> " + 1);
 //        ByteBuf in = (ByteBuf) msg;
