@@ -18,9 +18,8 @@ public class ByteBufToByteBuffer {
 
         ByteBuf byteBuf = Unpooled.buffer();
 
+
         byteBuf.writeInt(1);
-
-
 
         ByteBuffer byteBuffer =byteBuf.nioBuffer();
 

@@ -1,0 +1,177 @@
+
+
+1：select @@tx_isolaction；
+查看事物果隔离级别
+
++-----------------+
+| @@tx_isolation  |
++-----------------+
+| REPEATABLE-READ | 可重复读
++-----------------+
+1 row in set (0.00 sec)
+
+
+
+
+mysql> select *from c;
++------+
+| a    |
++------+
+|    1 |
+|    2 |
++------+
+2 rows in set (0.00 sec)
+
+
+开启一个事物
+
+start transaction;
+
+
+
+改变事物隔离级别,当前事物不改
+set global transaction isolation level read committed;
+
+set session  transaction isolation level read committed;
+
+
+
+实验1 :
+
+set session  transaction isolation level read uncommitted; 把事物设置为读未提交
+
+客户端A
+
+start transaction;
+
+mysql> select *from c;
++----+
+| a  |
++----+
+|  2 |
+| 1 |
+
+客户端B
+
+start transaction;
+update c set a = 10 where a = 1;
+
+
+客户端A
+mysql> select *from c;
++----+
+| a  |
++----+
+|  2 |
+| 10 |
+
+
+客户端B
+rollback;
+
+客户端A
+mysql> select *from c;
++----+
+| a  |
++----+
+|  2 |
+| 1 |
+
+结论：读未提交事物  ，会造成 当前事物把另一个事物没有提交的内容读出来， 如果另一个 事物 回滚 ，当前事物会出现肮读现象
+
+
+实验2：
+set session  transaction isolation level read committed; 把事物设置为读未提交
+mysql> select @@tx_isolation;
++----------------+
+| @@tx_isolation |
++----------------+
+| READ-COMMITTED |
++----------------+
+1 row in set (0.00 sec)
+
+客户端A
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select *from c;
++---+
+| a |
++---+
+| 1 |
+| 2 |
++---+
+2 rows in set (0.00 sec)
+
+
+客户端B
+
+mysql> start transaction;
+
+update c set a = 10 where a = 1;
+
+commot；
+
+客户端A
+
+mysql> select *from c;
++----+
+| a  |
++----+
+|  2 |
+| 10 |
++----+
+2 rows in set (0.00 sec)
+
+
+结论：
+读已提交事物  ，会造成 当前 同一事物下 读俩次 记录 ，读出的值不一样
+
+
+实验3
+
+set session  transaction isolation level repeatable read; 把事物设置为 可重复读
+
+mysql> select @@tx_isolation;
++-----------------+
+| @@tx_isolation  |
++-----------------+
+| REPEATABLE-READ |
++-----------------+
+1 row in set (0.00 sec)
+
+
+客户端A
+
+mysql> select *from c;
++---+
+| a |
++---+
+| 10 |
+| 2 |
++---+
+2 rows in set (0.00 sec)
+
+
+客户端B
+
+mysql> start transaction;
+
+update c set a = 10 where a = 1;
+
+commot；
+
+客户端A
+
+mysql> select *from c;
++---+
+| a |
++---+
+| 10 |
+| 2 |
++---+
+2 rows in set (0.00 sec)
+
+
+结论
+可重复读 当前一个事物  读取的值一值是一样的，不管另一个事物将当前事物修改称什么
